@@ -25,7 +25,7 @@ After run, it will be created a file log inside log folder.
 **Lucio Zanette** 
 
 [Medium](https://medium.com/@luciozanette)
-[Twitter] (https://twitter.com/luciozanette)
+[Twitter](https://twitter.com/luciozanette)
 
 ## License
 
