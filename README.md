@@ -1,4 +1,4 @@
-# State Machine
+# Python State Machine
 
 State machine for using in python projects.
 
@@ -25,6 +25,7 @@ After run, it will be created a file log inside log folder.
 **Lucio Zanette** 
 
 [Medium](https://medium.com/@luciozanette)
+
 [Twitter](https://twitter.com/luciozanette)
 
 ## License
