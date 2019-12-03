@@ -1,2 +1,2 @@
-# state_machine
+# State Machine
 Python state machine 
