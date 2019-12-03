@@ -10,6 +10,12 @@ Use Python 3!
 $ git clone https://github.com/LucioZanette/state_machine.git
 ```
 
+After that, create folder named log.
+
+```
+$ mkdir log
+```
+
 ## Running the tests
 
 After cloning, just running the example -- run.py
