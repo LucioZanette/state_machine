@@ -110,6 +110,9 @@ def run():
 	test = TestClass()
 	test.run()
 
+def test():
+	test = TestClass()
+	test.run()
 
 if __name__ == "__main__":
 	run()

@@ -5,15 +5,16 @@ import os
 import sys
 import time
 import logging
+from cpython cimport array
 from state_machine import StateMachine
 from datetime import datetime
 
-EXIT = 0  # exit must be zero
-FUNCTION_1 = 1
-FUNCTION_2 = 2
-FUNCTION_3 = 3
-FUNCTION_4 = 4
-FUNCTION_5 = 5
+cdef int EXIT = 0  # exit must be zero
+cdef int FUNCTION_1 = 1
+cdef int FUNCTION_2 = 2
+cdef int FUNCTION_3 = 3
+cdef int FUNCTION_4 = 4
+cdef int FUNCTION_5 = 5
 
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -33,13 +34,14 @@ logging.basicConfig(
 class TestClass(StateMachine):
 
 	def __init__(self):
-		self.set_queue([
+		cdef int[5] queue = [
 			FUNCTION_5,
 			FUNCTION_4, 
 			FUNCTION_3, 
 			FUNCTION_2, 
 			FUNCTION_1, 
-		])
+		]
+		self.set_queue(queue)
 
 
 	def __del__(self):
@@ -81,27 +83,6 @@ class TestClass(StateMachine):
 		logging.debug('function 5 init')
 
 
-def time_it(fun):
-	def wrapper(*args, **kwargs):
-		start = time.time()
-		res = fun(*args, **kwargs)
-		end = time.time()
-		print(f'Function took {end-start}s')
-
-		return res
-
-	return wrapper
-
-
-@time_it
-def run():
-	test = TestClass()
+cpdef void test():
+	cdef object test = TestClass()
 	test.run()
-
-
-def test():
-	test = TestClass()
-	test.run()
-
-if __name__ == "__main__":
-	run()
