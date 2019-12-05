@@ -6,6 +6,7 @@ import sys
 import time
 import logging
 from state_machine import StateMachine
+from pyswitch import switch
 from datetime import datetime
 
 EXIT = 0  # exit must be zero
@@ -17,7 +18,8 @@ FUNCTION_5 = 5
 
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
-log_name = '%s/log/test_%s.log' % (PROJECT_PATH, datetime.now().strftime('%Y%m%d'))
+log_name = '%s/log/test_%s.log' % (PROJECT_PATH,
+                                   datetime.now().strftime('%Y%m%d'))
 
 file_handler = logging.FileHandler(filename=log_name)
 stdout_handler = logging.StreamHandler(sys.stdout)
@@ -35,21 +37,11 @@ class TestClass(StateMachine):
 	def __init__(self):
 		self.set_queue([
 			FUNCTION_5,
-			FUNCTION_4, 
-			FUNCTION_3, 
-			FUNCTION_2, 
-			FUNCTION_1, 
+			FUNCTION_4,
+			FUNCTION_3,
+			FUNCTION_2,
+			FUNCTION_1,
 		])
-
-		self.__switcher = {
-			0: self.stop_run,
-			1: self.__function_1,
-			2: self.__function_2,
-			3: self.__function_3,
-			4: self.__function_4,
-			5: self.__function_5,
-		}
-
 
 	def __del__(self):
 		print('finish')
@@ -61,8 +53,26 @@ class TestClass(StateMachine):
 
 		try:
 			while self.must_run():
-				self.__switcher.get(next(self))()
-				
+				for case in switch(next(self)):
+					if case(FUNCTION_1):
+						self.__function_1()
+						continue
+					if case(FUNCTION_2):
+						self.__function_2()
+						continue
+					if case(FUNCTION_3):
+						self.__function_3()
+						continue
+					if case(FUNCTION_4):
+						self.__function_4()
+						continue
+					if case(FUNCTION_5):
+						self.__function_5()
+						continue
+					if case(EXIT):
+						self.stop_run()
+						break
+
 		except Exception as error:
 			logging.error(str(error))
 
