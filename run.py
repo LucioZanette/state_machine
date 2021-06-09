@@ -53,7 +53,7 @@ class TestClass(StateMachine):
 		try:
 			while self.must_run():
 				{
-					0: self.stop_run,
+					EXIT: self.stop_run,
 					1: self.__function_1,
 					2: self.__function_2,
 					3: self.__function_3,
